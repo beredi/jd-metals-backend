@@ -21,6 +21,10 @@ Route::middleware("auth:api")->group(function () {
         "users",
         \App\Http\Controllers\API\UserController::class
     );
+    Route::apiResource(
+        "customers",
+        \App\Http\Controllers\API\CustomerController::class
+    );
 
     Route::get(
         "refresh",

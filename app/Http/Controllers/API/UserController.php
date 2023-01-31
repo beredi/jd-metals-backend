@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        return UserResource::collection(User::paginate(9));
+        return UserResource::collection(User::paginate(10));
     }
 
     /**
