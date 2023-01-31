@@ -33,6 +33,18 @@ Route::middleware("auth:api")->group(function () {
         "purchases",
         \App\Http\Controllers\API\PurchaseController::class
     );
+    Route::apiResource(
+        "purchase-items",
+        \App\Http\Controllers\API\PurchaseItemController::class
+    );
+    Route::apiResource(
+        "units",
+        \App\Http\Controllers\API\UnitController::class
+    );
+    Route::apiResource(
+        "products",
+        \App\Http\Controllers\API\ProductController::class
+    );
 
     Route::get(
         "refresh",

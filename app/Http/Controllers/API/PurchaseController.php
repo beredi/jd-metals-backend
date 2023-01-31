@@ -19,7 +19,8 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        return PurchaseResource::collection(Purchase::paginate(10));
+        $purchases = Purchase::with("purchaseItems")->paginate(10);
+        return PurchaseResource::collection($purchases);
     }
 
     /**
@@ -42,7 +43,7 @@ class PurchaseController extends Controller
      */
     public function show(Purchase $purchase)
     {
-        return new PurchaseResource($purchase);
+        return new PurchaseResource($purchase->load(["purchaseItems"]));
     }
 
     /**
