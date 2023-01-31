@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Customer;
 use App\Models\Product;
+use App\Models\Project;
 use App\Models\ProjectType;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
@@ -28,5 +29,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Product::class);
         $this->call(PurchaseItem::class);
         $this->call(ProjectType::class);
+        $this->call(Project::class);
     }
 }

@@ -49,6 +49,10 @@ Route::middleware("auth:api")->group(function () {
         "project-types",
         \App\Http\Controllers\API\ProjectTypeController::class
     );
+    Route::apiResource(
+        "projects",
+        \App\Http\Controllers\API\ProjectController::class
+    );
 
     Route::get(
         "refresh",

@@ -29,4 +29,9 @@ class Customer extends Model
     protected $attributes = [
         "is_company" => false,
     ];
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }
