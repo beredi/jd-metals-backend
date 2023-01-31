@@ -9,4 +9,9 @@ class Supplier extends Model
 {
     use HasFactory;
     protected $fillable = ["name", "address", "phone", "email"];
+
+    public function purchase()
+    {
+        return $this->hasOne(Purchase::class);
+    }
 }

@@ -29,6 +29,10 @@ Route::middleware("auth:api")->group(function () {
         "suppliers",
         \App\Http\Controllers\API\SupplierController::class
     );
+    Route::apiResource(
+        "purchases",
+        \App\Http\Controllers\API\PurchaseController::class
+    );
 
     Route::get(
         "refresh",
