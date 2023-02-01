@@ -19,7 +19,7 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        $purchases = Purchase::with("purchaseItems")->paginate(10);
+        $purchases = Purchase::with(["purchaseItems", "project"])->paginate(10);
         return PurchaseResource::collection($purchases);
     }
 
@@ -32,7 +32,9 @@ class PurchaseController extends Controller
     public function store(StorePurchaseRequest $request)
     {
         $purchase = Purchase::create($request->all());
-        return new PurchaseResource($purchase);
+        return new PurchaseResource(
+            $purchase->load(["purchaseItems", "project"])
+        );
     }
 
     /**
@@ -43,7 +45,9 @@ class PurchaseController extends Controller
      */
     public function show(Purchase $purchase)
     {
-        return new PurchaseResource($purchase->load(["purchaseItems"]));
+        return new PurchaseResource(
+            $purchase->load(["purchaseItems", "project"])
+        );
     }
 
     /**
@@ -56,7 +60,9 @@ class PurchaseController extends Controller
     public function update(UpdatePurchaseRequest $request, Purchase $purchase)
     {
         $purchase->update($request->all());
-        return new PurchaseResource($purchase);
+        return new PurchaseResource(
+            $purchase->load(["purchaseItems", "project"])
+        );
     }
 
     /**

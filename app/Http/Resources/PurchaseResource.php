@@ -22,6 +22,7 @@ class PurchaseResource extends JsonResource
             "purchase_items" => PurchaseItemResource::collection(
                 $this->whenLoaded("purchaseItems")
             ),
+            "project" => new ProjectResource($this->whenLoaded("project")),
         ];
     }
 }
