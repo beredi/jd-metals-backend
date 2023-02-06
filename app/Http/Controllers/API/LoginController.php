@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Http\Controllers\API\Controller;
-use App\Http\Resources\UserResource;
-use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -20,12 +18,7 @@ class LoginController extends Controller
             return response()->json(["Error" => "Incorrect credentials"], 401);
         }
 
-        $user = User::where('email', $request->input('email'))->first();
-
-        return response()->json([
-            "AccessToken" => $token,
-            "User" => new UserResource($user),
-        ]);
+        return response()->json(["AccessToken" => $token]);
     }
 
     public function refresh(): \Illuminate\Http\JsonResponse
