@@ -18,7 +18,8 @@ class AddProjectIdToPurchases extends Migration
             $table
                 ->foreign("project_id")
                 ->references("id")
-                ->on("projects");
+                ->on("projects")
+                ->onDelete("set null");
         });
     }
 

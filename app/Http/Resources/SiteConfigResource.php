@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CustomerResource extends JsonResource
+class SiteConfigResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,21 +16,14 @@ class CustomerResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "is_company" => $this->is_company,
             "name" => $this->name,
-            "lastname" => $this->lastname,
+            "description" => $this->description,
             "address" => $this->address,
-            "email" => $this->email,
+            "logo" => $this->logo,
             "phone" => $this->phone,
-            "company_name" => $this->when(
-                $this->is_company,
-                $this->company_name
-            ),
-            "pib" => $this->when($this->is_company, $this->pib),
-            "maticni_broj" => $this->when(
-                $this->is_company,
-                $this->maticni_broj
-            ),
+            "owner" => $this->owner,
+            "pib" => $this->pib,
+            "maticni_broj" => $this->maticni_broj,
         ];
     }
 }

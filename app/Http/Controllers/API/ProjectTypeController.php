@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProjectTypeRequest;
 use App\Http\Requests\UpdateProjectTypeRequest;
 use App\Http\Resources\ProjectTypeResource;
 use App\Models\ProjectType;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class ProjectTypeController extends Controller
@@ -18,7 +19,7 @@ class ProjectTypeController extends Controller
      */
     public function index()
     {
-        $projectTypes = ProjectType::paginate(10);
+        $projectTypes = ProjectType::orderBy("id", "DESC")->get();
         return ProjectTypeResource::collection($projectTypes);
     }
 
@@ -70,5 +71,19 @@ class ProjectTypeController extends Controller
     {
         $projectType->delete();
         return response(null, ResponseAlias::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function bulkDelete(Request $request)
+    {
+        if ($request->has("ids")) {
+            ProjectType::destroy($request->input("ids"));
+            return response(null, ResponseAlias::HTTP_NO_CONTENT);
+        } else {
+            return response(null, 404);
+        }
     }
 }

@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        return UserResource::collection(User::paginate(10));
+        return UserResource::collection(User::orderBy("id", "DESC")->get());
     }
 
     /**
@@ -70,5 +70,12 @@ class UserController extends Controller
     {
         $user->delete();
         return response(null, ResponseAlias::HTTP_NO_CONTENT);
+    }
+
+    public function getUserByEmail(Request $request)
+    {
+        $user = User::where("email", $request->input("email"))->first();
+
+        return new UserResource($user);
     }
 }

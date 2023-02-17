@@ -21,17 +21,19 @@ class CreateProjectsTable extends Migration
             $table->date("planned_end")->nullable();
             $table->date("real_start")->nullable();
             $table->date("real_end")->nullable();
-            $table->unsignedBigInteger("customer_id");
-            $table
-                ->foreign("customer_id")
-                ->references("id")
-                ->on("customers");
-            $table->unsignedBigInteger("project_type_id");
-            $table
-                ->foreign("project_type_id")
-                ->references("id")
-                ->on("project_types");
             $table->timestamps();
+            $table
+                ->foreignId("customer_id")
+                ->nullable()
+                ->references("id")
+                ->on("customers")
+                ->onDelete("set null");
+            $table
+                ->foreignId("project_type_id")
+                ->nullable()
+                ->references("id")
+                ->on("project_types")
+                ->onDelete("set null");
         });
     }
 
