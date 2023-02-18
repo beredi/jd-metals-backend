@@ -22,6 +22,12 @@ class CreatePurchasesTable extends Migration
                 ->foreign("supplier_id")
                 ->references("id")
                 ->on("suppliers");
+                $table
+                    ->foreignId("project_id")
+                    ->nullable()
+                    ->references("id")
+                    ->on("projects")
+                    ->onDelete("set null");
             $table->timestamps();
         });
     }
